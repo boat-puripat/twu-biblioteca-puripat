@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Scanner;
+
 public class BibliotecaApp {
     public static void main(String[] args) {
         printWelcome();
@@ -8,7 +10,12 @@ public class BibliotecaApp {
             new Book("World", "Ms. B", 2021)
         };
         showMainMenu();
-        listAllBooks(books);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Choose option: ");
+        int selectedOption = scanner.nextInt();
+        if (selectedOption == 1) {
+            listAllBooks(books);
+        }
     }
 
     public static void printWelcome() {
