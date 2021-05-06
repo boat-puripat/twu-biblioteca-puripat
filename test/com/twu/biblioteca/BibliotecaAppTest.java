@@ -56,7 +56,7 @@ public class BibliotecaAppTest {
     public void shouldReEnterOptionWhenChooseInvalid() {
         Book[] books = new Book[1];
         String expectedValue = "Please select a valid option!\n";
-        BibliotecaApp.excuseMainMenu(-1, books);
+        BibliotecaApp.excuseMainMenu("-1", books);
         assertEquals(expectedValue, outputContent.toString());
     }
 
