@@ -40,7 +40,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldShowMainMenuOfOptions() {
-        String expectedValue = "Main Menu\n1. List of books";
+        String expectedValue = "Main Menu\n1. List of books\n";
         BibliotecaApp.showMainMenu();
         assertEquals(expectedValue, outputContent.toString());
     }
