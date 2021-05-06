@@ -3,13 +3,12 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 
 public class BibliotecaApp {
-    private static ArrayList<Book> books = new ArrayList<>() {{
-        add(new Book("Hello", "Mr. A", 2021));
-        add(new Book("World", "Ms. B", 2021));
-    }};
-
     public static void main(String[] args) {
         printWelcome();
+        ArrayList<Book> books = new ArrayList<>() {{
+            add(new Book("Hello", "Mr. A", 2021));
+            add(new Book("World", "Ms. B", 2021));
+        }};
         listAllBooks(books);
     }
 
