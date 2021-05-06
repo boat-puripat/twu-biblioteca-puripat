@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 public class BibliotecaAppTest {
     private ByteArrayOutputStream outputContent;
@@ -28,10 +27,10 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldListAllBooks() {
-        ArrayList<Book> books = new ArrayList<>() {{
-            add(new Book("Hello", "Mr. A", 2021));
-            add(new Book("World", "Ms. B", 2021));
-        }};
+        Book[] books = new Book[] {
+            new Book("Hello", "Mr. A", 2021),
+            new Book("World", "Ms. B", 2021)
+        };
 
         BibliotecaApp.listAllBooks(books);
         String expectedValue = "Hello     Mr. A     2021\nWorld     Ms. B     2021\n";
