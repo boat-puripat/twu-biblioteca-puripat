@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class BibliotecaApp {
     private static ArrayList<Book> books = new ArrayList<>() {{
-        add(new Book("Hello"));
-        add(new Book("World"));
+        add(new Book("Hello", "Mr. A", 2021));
+        add(new Book("World", "Ms. B", 2021));
     }};
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class BibliotecaApp {
 
     public static void listAllBooks(ArrayList<Book> books) {
         for (Book book: books) {
-            System.out.println(book.getName());
+            System.out.printf("%-10s%-10s%4d%n", book.getName(), book.getAuthor(), book.getPublicationYear());
         }
     }
 }
