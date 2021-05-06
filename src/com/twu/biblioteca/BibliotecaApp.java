@@ -9,6 +9,7 @@ public class BibliotecaApp {
             add(new Book("Hello", "Mr. A", 2021));
             add(new Book("World", "Ms. B", 2021));
         }};
+        showMainMenu();
         listAllBooks(books);
     }
 
@@ -21,5 +22,10 @@ public class BibliotecaApp {
         for (Book book: books) {
             System.out.printf("%-10s%-10s%4d%n", book.getName(), book.getAuthor(), book.getPublicationYear());
         }
+    }
+
+    public static void showMainMenu() {
+        System.out.println("Main Menu");
+        System.out.println("1. List of books");
     }
 }
