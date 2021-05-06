@@ -11,9 +11,11 @@ public class BibliotecaApp {
         };
         showMainMenu();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Choose option: ");
-        int selectedOption = scanner.nextInt();
-        excuseMainMenu(selectedOption, books);
+        while (true) {
+            System.out.print("Choose option: ");
+            int selectedOption = scanner.nextInt();
+            excuseMainMenu(selectedOption, books);
+        }
     }
 
     public static void printWelcome() {
@@ -35,6 +37,8 @@ public class BibliotecaApp {
     public static void excuseMainMenu(int option, Book[] books) {
         if (option == 1) {
             listAllBooks(books);
+        } else {
+            System.out.println("Please select a valid option!");
         }
     }
 }
