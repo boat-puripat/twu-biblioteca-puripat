@@ -51,4 +51,13 @@ public class BibliotecaAppTest {
         String expectedValue = "Hello     Mr. A     2021\n";
         assertEquals(expectedValue, outputContent.toString());
     }
+
+    @Test
+    public void shouldReEnterOptionWhenChooseInvalid() {
+        Book[] books = new Book[1];
+        String expectedValue = "Please select a valid option!\n";
+        BibliotecaApp.excuseMainMenu(-1, books);
+        assertEquals(expectedValue, outputContent.toString());
+    }
+
 }
