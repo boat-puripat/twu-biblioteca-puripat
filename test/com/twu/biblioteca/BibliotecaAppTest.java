@@ -47,7 +47,7 @@ public class BibliotecaAppTest {
     @Test
     public void shouldListAllBooksWhenChoose1() {
         Book[] books = new Book[] {new Book("Hello", "Mr. A", 2021)};
-        BibliotecaApp.excuseMainMenu(1, books);
+        BibliotecaApp.excuseMainMenu("1", books);
         String expectedValue = "Hello     Mr. A     2021\n";
         assertEquals(expectedValue, outputContent.toString());
     }
