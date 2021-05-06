@@ -24,12 +24,12 @@ public class BibliotecaAppTest {
         PrintStream outStream = new PrintStream(outputContent);
         System.setOut(outStream);
         ArrayList<Book> books = new ArrayList<>() {{
-            add(new Book("Hello"));
-            add(new Book("World"));
+            add(new Book("Hello", "Mr. A", "2021"));
+            add(new Book("World", "Ms. B", "2021"));
         }};
 
         BibliotecaApp.listAllBooks(books);
-        String expectedValue = "Hello\nWorld\n";
+        String expectedValue = "Hello     Mr. A     2021\nWorld     Ms. B     2021\n";
         assertEquals(expectedValue, outputContent.toString());
     }
 }
