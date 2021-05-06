@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.manager.ExitManager;
+import com.twu.biblioteca.manager.ExitManagerImpl;
+
 import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -32,13 +35,21 @@ public class BibliotecaApp {
     public static void showMainMenu() {
         System.out.println("Main Menu");
         System.out.println("1. List of books");
+        System.out.println("q. quit");
     }
 
-    public static void excuseMainMenu(String option, Book[] books) {
+    public static void excuseMainMenu(String option, Book[] books, ExitManager exitManager) {
         if (option.equals("1")) {
             listAllBooks(books);
+        } else if (option.equals("q")) {
+            exitManager.exit(0);
         } else {
             System.out.println("Please select a valid option!");
         }
+    }
+
+    public static void excuseMainMenu(String option, Book[] books) {
+        ExitManagerImpl exitManager = new ExitManagerImpl();
+        excuseMainMenu(option, books, exitManager);
     }
 }
