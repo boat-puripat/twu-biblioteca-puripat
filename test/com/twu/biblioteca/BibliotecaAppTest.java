@@ -1,12 +1,12 @@
 package com.twu.biblioteca;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import static org.junit.Assert.*;
 
 public class BibliotecaAppTest {
     private ByteArrayOutputStream outputContent;
@@ -60,4 +60,11 @@ public class BibliotecaAppTest {
         assertEquals(expectedValue, outputContent.toString());
     }
 
+    @Test
+    public void systemShouldExitWhenChooseExit() {
+        ExitManager mockExitManager = ExitManagerMock();
+        Book[] books = new Book[1];
+        BibliotecaApp.excuseMainMenu("q", books);
+        assertTrue(mockExitManager.exitWasCalled);
+    }
 }
