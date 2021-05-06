@@ -24,8 +24,8 @@ public class BibliotecaAppTest {
         PrintStream outStream = new PrintStream(outputContent);
         System.setOut(outStream);
         ArrayList<Book> books = new ArrayList<>() {{
-            add(new Book("Hello", "Mr. A", "2021"));
-            add(new Book("World", "Ms. B", "2021"));
+            add(new Book("Hello", "Mr. A", 2021));
+            add(new Book("World", "Ms. B", 2021));
         }};
 
         BibliotecaApp.listAllBooks(books);
