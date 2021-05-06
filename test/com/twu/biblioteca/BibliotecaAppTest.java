@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.manager.ExitManagerMock;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,7 +63,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void systemShouldExitWhenChooseExit() {
-        ExitManager mockExitManager = ExitManagerMock();
+        ExitManagerMock mockExitManager = new ExitManagerMock();
         Book[] books = new Book[1];
         BibliotecaApp.excuseMainMenu("q", books);
         assertTrue(mockExitManager.exitWasCalled);
