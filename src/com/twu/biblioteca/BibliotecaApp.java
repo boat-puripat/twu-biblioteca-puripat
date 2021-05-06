@@ -13,7 +13,7 @@ public class BibliotecaApp {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Choose option: ");
-            int selectedOption = scanner.nextInt();
+            String selectedOption = scanner.nextLine();
             excuseMainMenu(selectedOption, books);
         }
     }
@@ -34,8 +34,8 @@ public class BibliotecaApp {
         System.out.println("1. List of books");
     }
 
-    public static void excuseMainMenu(int option, Book[] books) {
-        if (option == 1) {
+    public static void excuseMainMenu(String option, Book[] books) {
+        if (option.equals("1")) {
             listAllBooks(books);
         } else {
             System.out.println("Please select a valid option!");
