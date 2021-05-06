@@ -65,7 +65,7 @@ public class BibliotecaAppTest {
     public void systemShouldExitWhenChooseExit() {
         ExitManagerMock mockExitManager = new ExitManagerMock();
         Book[] books = new Book[1];
-        BibliotecaApp.excuseMainMenu("q", books);
+        BibliotecaApp.excuseMainMenu("q", books, mockExitManager);
         assertTrue(mockExitManager.exitWasCalled);
     }
 }
