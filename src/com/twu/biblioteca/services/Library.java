@@ -24,4 +24,9 @@ public class Library {
             printer.print(book.toString(), true);
         }
     }
+
+    public void showMenu() {
+        printer.print("Main Menu", true);
+        printer.print("1 List of books", true);
+    }
 }
