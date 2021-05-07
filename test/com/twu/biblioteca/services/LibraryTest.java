@@ -5,10 +5,8 @@ import com.twu.biblioteca.models.Book;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
+import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
@@ -31,7 +29,15 @@ public class LibraryTest {
 
     @Test
     public void testPrintWelcome() {
+        Mockito.doNothing().when(printer).print("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!", true);
         library.printWelcome();
         Mockito.verify(printer, Mockito.times(1)).print("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!", true);
+    }
+
+    @Test
+    public void testListBooks() {
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), true);
+        library.listBooks();
+        Mockito.verify(printer, Mockito.times(books.size())).print(Matchers.anyString(), true);
     }
 }
