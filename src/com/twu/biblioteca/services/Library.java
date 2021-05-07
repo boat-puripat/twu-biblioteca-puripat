@@ -18,4 +18,10 @@ public class Library {
         String welcomeSentence = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
         printer.print(welcomeSentence, true);
     }
+
+    public void listBooks() {
+        for (Book book: books) {
+            printer.print(book.toString(), true);
+        }
+    }
 }
