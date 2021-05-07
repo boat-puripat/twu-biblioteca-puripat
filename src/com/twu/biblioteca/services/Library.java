@@ -1,16 +1,19 @@
 package com.twu.biblioteca.services;
 
 import com.twu.biblioteca.managers.Printer;
+import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
 
 import java.util.List;
 
 public class Library {
     private Printer printer;
+    private SystemExit systemExit;
     private List<Book> books;
 
-    public Library(Printer printer, List<Book> books) {
+    public Library(Printer printer, SystemExit systemExit, List<Book> books) {
         this.printer = printer;
+        this.systemExit = systemExit;
         this.books = books;
     }
 
@@ -28,9 +31,14 @@ public class Library {
     public void showMenu() {
         printer.print("Main Menu", true);
         printer.print("1 List of books", true);
+        printer.print("q Quit", true);
     }
 
     public void invalidOption() {
         printer.print("Please select a valid option!", true);
+    }
+
+    public void quit() {
+        systemExit.exit(0);
     }
 }
