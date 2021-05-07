@@ -1,6 +1,7 @@
 package com.twu.biblioteca.services;
 
 import com.twu.biblioteca.managers.Printer;
+import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -18,8 +20,13 @@ public class LibraryTest {
     @Mock
     public Printer printer;
 
+    @Spy
+    public List<Book> books = new ArrayList<Book>() {{
+        add(new Book("test1", "author1", 2021));
+    }};
+
     @Mock
-    public List<Book> books;
+    public SystemExit systemExit;
 
     @Before
     public void setup() {
@@ -35,23 +42,31 @@ public class LibraryTest {
 
     @Test
     public void testListBooks() {
-        Mockito.doNothing().when(printer).print(Matchers.anyString(), true);
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         library.listBooks();
-        Mockito.verify(printer, Mockito.times(books.size())).print(Matchers.anyString(), true);
+        Mockito.verify(printer, Mockito.times(books.size())).print(Matchers.anyString(), Matchers.eq(true));
     }
 
     @Test
     public void testShowMenu() {
-        Mockito.doNothing().when(printer).print(Matchers.anyString(), true);
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         library.showMenu();
         Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
         Mockito.verify(printer, Mockito.times(1)).print("1 List of books", true);
+        Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
     }
 
     @Test
     public void testInvalidOption() {
-        Mockito.doNothing().when(printer).print(Matchers.anyString(), true);
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         library.invalidOption();
         Mockito.verify(printer, Mockito.times(1)).print("Please select a valid option!", true);
+    }
+
+    @Test
+    public void testQuit() {
+        Mockito.doNothing().when(systemExit).exit(0);
+        library.quit();
+        Mockito.verify(systemExit, Mockito.times(1)).exit(0);
     }
 }
