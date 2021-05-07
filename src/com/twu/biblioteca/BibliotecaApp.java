@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.manager.ExitManager;
 import com.twu.biblioteca.manager.ExitManagerImpl;
+import com.twu.biblioteca.models.Book;
 
 import java.util.Scanner;
 

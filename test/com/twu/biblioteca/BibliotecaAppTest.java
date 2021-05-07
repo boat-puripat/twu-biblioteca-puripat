@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.manager.ExitManagerMock;
+import com.twu.biblioteca.models.Book;
 import org.junit.Before;
 import org.junit.Test;
 
