@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
-import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
@@ -39,5 +38,13 @@ public class LibraryTest {
         Mockito.doNothing().when(printer).print(Matchers.anyString(), true);
         library.listBooks();
         Mockito.verify(printer, Mockito.times(books.size())).print(Matchers.anyString(), true);
+    }
+
+    @Test
+    public void testShowMenu() {
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), true);
+        library.showMenu();
+        Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
+        Mockito.verify(printer, Mockito.times(1)).print("1 List of books", true);
     }
 }
