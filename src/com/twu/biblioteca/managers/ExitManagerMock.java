@@ -1,4 +1,4 @@
-package com.twu.biblioteca.manager;
+package com.twu.biblioteca.managers;
 
 public class ExitManagerMock implements ExitManager {
     public boolean exitWasCalled;

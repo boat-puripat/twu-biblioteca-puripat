@@ -1,4 +1,4 @@
-package com.twu.biblioteca.manager;
+package com.twu.biblioteca.managers;
 
 public class ExitManagerImpl implements ExitManager {
     @Override

@@ -1,6 +1,6 @@
 package com.twu.biblioteca.services;
 
-import com.twu.biblioteca.manager.Printer;
+import com.twu.biblioteca.managers.Printer;
 import com.twu.biblioteca.models.Book;
 import org.junit.Before;
 import org.junit.Test;
