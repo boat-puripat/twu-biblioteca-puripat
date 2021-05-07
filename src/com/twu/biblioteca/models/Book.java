@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.models;
 
 public class Book {
     private String name;
@@ -21,5 +21,10 @@ public class Book {
 
     public int getPublicationYear() {
         return publicationYear;
+    }
+
+    @Override
+    public String toString() {
+        return name + "\t" + author + "\t" + publicationYear;
     }
 }
