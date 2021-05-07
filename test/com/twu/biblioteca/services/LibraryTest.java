@@ -47,4 +47,11 @@ public class LibraryTest {
         Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
         Mockito.verify(printer, Mockito.times(1)).print("1 List of books", true);
     }
+
+    @Test
+    public void testInvalidOption() {
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), true);
+        library.invalidOption();
+        Mockito.verify(printer, Mockito.times(1)).print("Please select a valid option!", true);
+    }
 }
