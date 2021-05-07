@@ -29,4 +29,8 @@ public class Library {
         printer.print("Main Menu", true);
         printer.print("1 List of books", true);
     }
+
+    public void invalidOption() {
+        printer.print("Please select a valid option!", true);
+    }
 }
