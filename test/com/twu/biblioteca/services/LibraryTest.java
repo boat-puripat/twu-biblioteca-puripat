@@ -64,6 +64,7 @@ public class LibraryTest {
         Mockito.verify(printer, Mockito.times(1)).print("2 Checkout a book", true);
         Mockito.verify(printer, Mockito.times(1)).print("3 Return a book", true);
         Mockito.verify(printer, Mockito.times(1)).print("4 List of movies", true);
+        Mockito.verify(printer, Mockito.times(1)).print("5 Checkout a movie", true);
         Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
     }
 
@@ -113,6 +114,14 @@ public class LibraryTest {
         Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         library.listAvailableMovies();
         Mockito.verify(printer, Mockito.times(1)).print(Matchers.anyString(), Matchers.eq(true));
+    }
+
+    @Test
+    public void testCheckoutMovie() {
+        String movieNameForCheckout = "test1";
+        library.checkoutMovie(movieNameForCheckout);
+        Movie testMovie = movies.stream().filter(movie -> movieNameForCheckout.equals(movie.getName())).findAny().orElse(null);
+        Mockito.verify(testMovie, Mockito.times(1)).checkout();
     }
 
     @Test
