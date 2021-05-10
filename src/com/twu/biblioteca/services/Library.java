@@ -49,6 +49,11 @@ public class Library {
         }
     }
 
+    public void returnBook(String bookName) {
+        Book bookForReturn = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
+        bookForReturn.returnBook();
+    }
+
     public void quit() {
         systemExit.exit(0);
     }
