@@ -51,7 +51,10 @@ public class Library {
 
     public void returnBook(String bookName) {
         Book bookForReturn = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
-        bookForReturn.returnBook();
+        if (bookForReturn != null) {
+            bookForReturn.returnBook();
+            printer.print("Thank you for returning the book", true);
+        }
     }
 
     public void quit() {
