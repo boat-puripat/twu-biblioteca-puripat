@@ -32,6 +32,7 @@ public class Library {
         printer.print("Main Menu", true);
         printer.print("1 List of books", true);
         printer.print("2 Checkout a book", true);
+        printer.print("3 Return a book", true);
         printer.print("q Quit", true);
     }
 
@@ -41,7 +42,7 @@ public class Library {
 
     public void checkoutBook(String bookName) {
         Book bookForCheckout = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
-        if (bookForCheckout != null) {
+        if (bookForCheckout != null && bookForCheckout.isAvailable()) {
             bookForCheckout.checkout();
             printer.print("Thank you! Enjoy the book", true);
         } else {
@@ -51,9 +52,11 @@ public class Library {
 
     public void returnBook(String bookName) {
         Book bookForReturn = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
-        if (bookForReturn != null) {
+        if (bookForReturn != null && !bookForReturn.isAvailable()) {
             bookForReturn.returnBook();
             printer.print("Thank you for returning the book", true);
+        } else {
+            printer.print("That is not a valid book to return.", true);
         }
     }
 
