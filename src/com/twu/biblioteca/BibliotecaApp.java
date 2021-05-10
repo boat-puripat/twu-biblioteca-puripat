@@ -24,6 +24,11 @@ public class BibliotecaApp {
             printer.print("Choose option: ", false);
             String selectedOption = scanner.nextLine();
             if (selectedOption.equals("1")) library.listBooks();
+            else if (selectedOption.equals("2")) {
+                printer.print("Checkout book name: ", false);
+                String bookName = scanner.nextLine();
+                library.checkoutBook(bookName);
+            }
             else if (selectedOption.equals("q")) library.quit();
             else library.invalidOption();
         }
