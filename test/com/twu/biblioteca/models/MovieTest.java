@@ -21,6 +21,12 @@ public class MovieTest {
     }
 
     @Test
+    public void testIsAvailable() {
+        boolean actualValue = testMovie.isAvailable();
+        assertTrue(actualValue);
+    }
+
+    @Test
     public void testToString() {
         String expectValue = "name\t2021\tdirector\t10";
         String actualValue = testMovie.toString();
