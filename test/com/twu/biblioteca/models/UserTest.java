@@ -15,7 +15,7 @@ public class UserTest {
     }
 
     @Test
-    public void testlogAction() {
+    public void testLogAction() {
         Book testBook = new Book("name", "author", 2021);
         testUser.logAction(testBook, ActionType.RETURN);
         int numberOfActionHistories = testUser.getActionHistories().size();
