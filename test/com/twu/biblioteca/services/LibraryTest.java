@@ -4,6 +4,7 @@ import com.twu.biblioteca.managers.Printer;
 import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.Movie;
+import com.twu.biblioteca.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,9 @@ public class LibraryTest {
     @Mock
     public SystemExit systemExit;
 
+    @Spy
+    public User user = new User();
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -56,7 +60,21 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShowMenu() {
+    public void testShowMenuWithoutAuth() {
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
+        library.showMenu();
+        Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
+        Mockito.verify(printer, Mockito.times(1)).print("1 List of books", true);
+        Mockito.verify(printer, Mockito.times(0)).print("2 Checkout a book", true);
+        Mockito.verify(printer, Mockito.times(0)).print("3 Return a book", true);
+        Mockito.verify(printer, Mockito.times(1)).print("4 List of movies", true);
+        Mockito.verify(printer, Mockito.times(1)).print("5 Checkout a movie", true);
+        Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
+
+    }
+
+    @Test
+    public void testShowMenuWithAuth() {
         Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         library.showMenu();
         Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
