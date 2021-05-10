@@ -1,5 +1,7 @@
 package com.twu.biblioteca.models;
 
+import com.twu.biblioteca.constaints.ActionType;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +16,14 @@ public class User {
         this.libraryNumber = libraryNumber;
         this.password = password;
         this.actionHistories = Collections.emptyList();
+    }
+
+    public List<ActionHistory> getActionHistories() {
+        return actionHistories;
+    }
+
+    public void logAction(Media media, ActionType actionType) {
+        actionHistories.add(new ActionHistory(media, actionType));
     }
 
     @Override
