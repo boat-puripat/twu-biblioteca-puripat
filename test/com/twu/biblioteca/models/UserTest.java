@@ -1,5 +1,6 @@
 package com.twu.biblioteca.models;
 
+import com.twu.biblioteca.constaints.ActionType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,6 +12,14 @@ public class UserTest {
     @Before
     public void setup() {
         testUser = new User("username", "password");
+    }
+
+    @Test
+    public void testlogAction() {
+        Book testBook = new Book("name", "author", 2021);
+        testUser.logAction(testBook, ActionType.RETURN);
+        int numberOfActionHistories = testUser.getActionHistories().size();
+        assertEquals(1, numberOfActionHistories);
     }
 
     @Test
