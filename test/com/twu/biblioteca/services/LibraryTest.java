@@ -75,6 +75,15 @@ public class LibraryTest {
     }
 
     @Test
+    public void testCheckoutBookWithFail() {
+        String bookNameForCheckout = "test2";
+        library.checkoutBook(bookNameForCheckout);
+        Book testBook = books.stream().filter(book -> bookNameForCheckout.equals(book.getName())).findAny().orElse(null);
+        Mockito.verify(printer, Mockito.times(0)).print("Thank you! Enjoy the book", true);
+        Mockito.verify(printer, Mockito.times(1)).print("Sorry, that book is not available", true);
+    }
+
+    @Test
     public void testQuit() {
         Mockito.doNothing().when(systemExit).exit(0);
         library.quit();
