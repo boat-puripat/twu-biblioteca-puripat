@@ -29,6 +29,10 @@ public class Book {
         return isAvailable;
     }
 
+    public void checkout() {
+        this.isAvailable = false;
+    }
+
     @Override
     public String toString() {
         return name + "\t" + author + "\t" + publicationYear;
