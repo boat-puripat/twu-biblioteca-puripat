@@ -1,5 +1,6 @@
 package com.twu.biblioteca.services;
 
+import com.twu.biblioteca.constaints.ActionType;
 import com.twu.biblioteca.managers.Printer;
 import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
@@ -38,7 +39,7 @@ public class LibraryTest {
     public SystemExit systemExit;
 
     @Spy
-    public User user = new User();
+    public User testUser = new User();
 
     @Before
     public void setup() {
@@ -61,6 +62,7 @@ public class LibraryTest {
 
     @Test
     public void testShowMenuWithoutAuth() {
+        Library library = new Library(printer, systemExit, books, movies, null);
         Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         library.showMenu();
         Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
@@ -98,7 +100,9 @@ public class LibraryTest {
         String bookNameForCheckout = "test1";
         library.checkoutBook(bookNameForCheckout);
         Book testBook = books.stream().filter(book -> bookNameForCheckout.equals(book.getName())).findAny().orElse(null);
+        Mockito.doNothing().when(testUser).logAction(testBook, ActionType.CHECKOUT);
         Mockito.verify(testBook, Mockito.times(1)).checkout();
+        Mockito.verify(testUser, Mockito.times(1)).logAction(testBook, ActionType.CHECKOUT);
         Mockito.verify(printer, Mockito.times(1)).print("Thank you! Enjoy the book", true);
     }
 
@@ -115,7 +119,9 @@ public class LibraryTest {
         String bookNameForReturn = "test2";
         library.returnBook(bookNameForReturn);
         Book testBook = books.stream().filter(book -> bookNameForReturn.equals(book.getName())).findAny().orElse(null);
+        Mockito.doNothing().when(testUser).logAction(testBook, ActionType.RETURN);
         Mockito.verify(testBook, Mockito.times(1)).returnBook();
+        Mockito.verify(testUser, Mockito.times(1)).logAction(testBook, ActionType.RETURN);
         Mockito.verify(printer, Mockito.times(1)).print("Thank you for returning the book", true);
     }
 
