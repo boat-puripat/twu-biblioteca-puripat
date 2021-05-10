@@ -66,11 +66,12 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckoutBook() {
+    public void testCheckoutBookWithSuccess() {
         String bookNameForCheckout = "test1";
         library.checkoutBook(bookNameForCheckout);
-        Book testBook = books.stream().filter(book -> bookNameForCheckout.equals(book.getName())).findAny().get();
+        Book testBook = books.stream().filter(book -> bookNameForCheckout.equals(book.getName())).findAny().orElse(null);
         Mockito.verify(testBook, Mockito.times(1)).checkout();
+        Mockito.verify(printer, Mockito.times(1)).print("Thank you! Enjoy the book", true);
     }
 
     @Test
