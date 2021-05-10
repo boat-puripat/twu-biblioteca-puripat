@@ -37,6 +37,7 @@ public class Library {
         printer.print("2 Checkout a book", true);
         printer.print("3 Return a book", true);
         printer.print("4 List of movies", true);
+        printer.print("5 Checkout a movie", true);
         printer.print("q Quit", true);
     }
 
@@ -68,6 +69,11 @@ public class Library {
         for (Movie movie: movies) {
             if (movie.isAvailable()) printer.print(movie.toString(), true);
         }
+    }
+
+    public void checkoutMovie(String movieName) {
+        Movie movieForCheckout = movies.stream().filter(movie -> movieName.equals(movie.getName())).findAny().orElse(null);
+        if (movieForCheckout != null) movieForCheckout.checkout();
     }
 
     public void quit() {
