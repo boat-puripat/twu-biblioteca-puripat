@@ -14,4 +14,12 @@ public class User {
         this.actionHistories = Collections.emptyList();
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null) return false;
+        if (!(object instanceof User)) return false;
+        User user = (User) object;
+        return libraryNumber.equals(user.libraryNumber) && password.equals(user.password);
+    }
 }
