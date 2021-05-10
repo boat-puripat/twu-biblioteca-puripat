@@ -37,6 +37,10 @@ public class Book {
         this.isAvailable = false;
     }
 
+    public void returnBook() {
+        this.isAvailable = true;
+    }
+
     @Override
     public String toString() {
         return name + "\t" + author + "\t" + publicationYear;
