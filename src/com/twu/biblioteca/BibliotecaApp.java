@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.managers.PrinterConsole;
 import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
+import com.twu.biblioteca.models.Movie;
 import com.twu.biblioteca.services.Library;
 
 import java.util.ArrayList;
@@ -16,14 +17,18 @@ public class BibliotecaApp {
             add(new Book("Hello", "Mr. A", 2021));
             add(new Book("World", "Ms. B", 2021));
         }};
-        Library library = new Library(printer, systemExit, books);
+        ArrayList<Movie> movies = new ArrayList<>() {{
+            add(new Movie("Parasite", "Mr. C", 2021, 10));
+            add(new Movie("Dinosaur", "Mrs. D", 2021, 5));
+        }};
+        Library library = new Library(printer, systemExit, books, movies);
         library.printWelcome();
         library.showMenu();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             printer.print("Choose option: ", false);
             String selectedOption = scanner.nextLine();
-            if (selectedOption.equals("1")) library.listBooks();
+            if (selectedOption.equals("1")) library.listAvailableBooks();
             else if (selectedOption.equals("2")) {
                 printer.print("Checkout book name: ", false);
                 String bookName = scanner.nextLine();
