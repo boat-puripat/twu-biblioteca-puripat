@@ -40,8 +40,11 @@ public class Library {
     }
 
     public void checkoutBook(String bookName) {
-        Book bookForCheckout = books.stream().filter(book -> bookName.equals(book.getName())).findAny().get();
-        bookForCheckout.checkout();
+        Book bookForCheckout = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
+        if (bookForCheckout != null) {
+            bookForCheckout.checkout();
+            printer.print("Thank you! Enjoy the book", true);
+        }
     }
 
     public void quit() {
