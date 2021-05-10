@@ -29,6 +29,11 @@ public class BibliotecaApp {
                 String bookName = scanner.nextLine();
                 library.checkoutBook(bookName);
             }
+            else if (selectedOption.equals("3")) {
+                printer.print("Return book name: ", false);
+                String bookName = scanner.nextLine();
+                library.returnBook(bookName);
+            }
             else if (selectedOption.equals("q")) library.quit();
             else library.invalidOption();
         }
