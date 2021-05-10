@@ -3,6 +3,7 @@ package com.twu.biblioteca.services;
 import com.twu.biblioteca.managers.Printer;
 import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
+import com.twu.biblioteca.models.Movie;
 
 import java.util.List;
 
@@ -10,11 +11,13 @@ public class Library {
     private Printer printer;
     private SystemExit systemExit;
     private List<Book> books;
+    private List<Movie> movies;
 
-    public Library(Printer printer, SystemExit systemExit, List<Book> books) {
+    public Library(Printer printer, SystemExit systemExit, List<Book> books, List<Movie> movies) {
         this.printer = printer;
         this.systemExit = systemExit;
         this.books = books;
+        this.movies = movies;
     }
 
     public void printWelcome() {
@@ -22,7 +25,7 @@ public class Library {
         printer.print(welcomeSentence, true);
     }
 
-    public void listBooks() {
+    public void listAvailableBooks() {
         for (Book book: books) {
             if (book.isAvailable()) printer.print(book.toString(), true);
         }
@@ -33,6 +36,7 @@ public class Library {
         printer.print("1 List of books", true);
         printer.print("2 Checkout a book", true);
         printer.print("3 Return a book", true);
+        printer.print("4 List of movies", true);
         printer.print("q Quit", true);
     }
 
@@ -57,6 +61,12 @@ public class Library {
             printer.print("Thank you for returning the book", true);
         } else {
             printer.print("That is not a valid book to return.", true);
+        }
+    }
+
+    public void listAvailableMovies() {
+        for (Movie movie: movies) {
+            if (movie.isAvailable()) printer.print(movie.toString(), true);
         }
     }
 
