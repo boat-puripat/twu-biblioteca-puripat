@@ -8,6 +8,8 @@ public class User {
     private String password;
     private List<ActionHistory> actionHistories;
 
+    public User() {}
+
     public User(String libraryNumber, String password) {
         this.libraryNumber = libraryNumber;
         this.password = password;
