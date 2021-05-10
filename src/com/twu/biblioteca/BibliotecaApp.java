@@ -39,6 +39,7 @@ public class BibliotecaApp {
                 String bookName = scanner.nextLine();
                 library.returnBook(bookName);
             }
+            else if (selectedOption.equals("4")) library.listAvailableMovies();
             else if (selectedOption.equals("q")) library.quit();
             else library.invalidOption();
         }
