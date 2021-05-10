@@ -93,6 +93,14 @@ public class LibraryTest {
     }
 
     @Test
+    public void testReturnBookWithFail() {
+        String bookNameForCheckout = "test1";
+        library.returnBook(bookNameForCheckout);
+        Mockito.verify(printer, Mockito.times(0)).print("Thank you for returning the book", true);
+        Mockito.verify(printer, Mockito.times(1)).print("That is not a valid book to return.", true);
+    }
+
+    @Test
     public void testQuit() {
         Mockito.doNothing().when(systemExit).exit(0);
         library.quit();
