@@ -24,18 +24,24 @@ public class Library {
 
     public void listBooks() {
         for (Book book: books) {
-            printer.print(book.toString(), true);
+            if (book.isAvailable()) printer.print(book.toString(), true);
         }
     }
 
     public void showMenu() {
         printer.print("Main Menu", true);
         printer.print("1 List of books", true);
+        printer.print("2 Checkout a book", true);
         printer.print("q Quit", true);
     }
 
     public void invalidOption() {
         printer.print("Please select a valid option!", true);
+    }
+
+    public void checkoutBook(String bookName) {
+        Book bookForCheckout = books.stream().filter(book -> bookName.equals(book.getName())).findAny().get();
+        bookForCheckout.checkout();
     }
 
     public void quit() {
