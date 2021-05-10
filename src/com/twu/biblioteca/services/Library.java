@@ -44,6 +44,8 @@ public class Library {
         if (bookForCheckout != null) {
             bookForCheckout.checkout();
             printer.print("Thank you! Enjoy the book", true);
+        } else {
+            printer.print("Sorry, that book is not available", true);
         }
     }
 
