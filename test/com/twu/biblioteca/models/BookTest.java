@@ -41,6 +41,13 @@ public class BookTest {
     }
 
     @Test
+    public void testCheckout() {
+        testBook.checkout();
+        boolean actualValue = testBook.isAvailable();
+        assertFalse(actualValue);
+    }
+
+    @Test
     public void testToString() {
         String expectedValue = "name\tauthor\t2021";
         String actualValue = testBook.toString();
