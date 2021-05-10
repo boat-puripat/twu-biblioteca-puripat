@@ -1,9 +1,11 @@
 package com.twu.biblioteca.services;
 
+import com.twu.biblioteca.constaints.ActionType;
 import com.twu.biblioteca.managers.Printer;
 import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.Movie;
+import com.twu.biblioteca.models.User;
 
 import java.util.List;
 
@@ -12,12 +14,14 @@ public class Library {
     private SystemExit systemExit;
     private List<Book> books;
     private List<Movie> movies;
+    private User user;
 
-    public Library(Printer printer, SystemExit systemExit, List<Book> books, List<Movie> movies) {
+    public Library(Printer printer, SystemExit systemExit, List<Book> books, List<Movie> movies, User user) {
         this.printer = printer;
         this.systemExit = systemExit;
         this.books = books;
         this.movies = movies;
+        this.user = user;
     }
 
     public void printWelcome() {
@@ -34,8 +38,10 @@ public class Library {
     public void showMenu() {
         printer.print("Main Menu", true);
         printer.print("1 List of books", true);
-        printer.print("2 Checkout a book", true);
-        printer.print("3 Return a book", true);
+        if (user != null) {
+            printer.print("2 Checkout a book", true);
+            printer.print("3 Return a book", true);
+        }
         printer.print("4 List of movies", true);
         printer.print("5 Checkout a movie", true);
         printer.print("q Quit", true);
@@ -49,6 +55,7 @@ public class Library {
         Book bookForCheckout = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
         if (bookForCheckout != null && bookForCheckout.isAvailable()) {
             bookForCheckout.checkout();
+            user.logAction(bookForCheckout, ActionType.CHECKOUT);
             printer.print("Thank you! Enjoy the book", true);
         } else {
             printer.print("Sorry, that book is not available", true);
@@ -59,6 +66,7 @@ public class Library {
         Book bookForReturn = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
         if (bookForReturn != null && !bookForReturn.isAvailable()) {
             bookForReturn.returnBook();
+            user.logAction(bookForReturn, ActionType.RETURN);
             printer.print("Thank you for returning the book", true);
         } else {
             printer.print("That is not a valid book to return.", true);
