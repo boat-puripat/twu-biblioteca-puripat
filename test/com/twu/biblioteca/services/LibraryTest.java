@@ -84,11 +84,12 @@ public class LibraryTest {
     }
 
     @Test
-    public void testReturnBook() {
+    public void testReturnBookWithSuccess() {
         String bookNameForReturn = "test2";
         library.returnBook(bookNameForReturn);
         Book testBook = books.stream().filter(book -> bookNameForReturn.equals(book.getName())).findAny().orElse(null);
         Mockito.verify(testBook, Mockito.times(1)).returnBook();
+        Mockito.verify(printer, Mockito.times(1)).print("Thank you for returning the book", true);
     }
 
     @Test
