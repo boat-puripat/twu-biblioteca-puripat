@@ -1,32 +1,12 @@
 package com.twu.biblioteca.models;
 
-public class Book {
-    private String name;
-    private String author;
-    private int publicationYear;
-    private boolean isAvailable;
-
+public class Book extends Media {
     public Book(String name, String author, int publicationYear) {
         this(name, author, publicationYear, true);
     }
 
     public Book(String name, String author, int publicationYear, boolean isAvailable) {
-        this.name = name;
-        this.author = author;
-        this.publicationYear = publicationYear;
-        this.isAvailable = isAvailable;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void checkout() {
-        this.isAvailable = false;
+        super(name, author, publicationYear, isAvailable);
     }
 
     public void returnBook() {
@@ -35,6 +15,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return name + "\t" + author + "\t" + publicationYear;
+        return name + "\t" + creator + "\t" + year;
     }
 }
