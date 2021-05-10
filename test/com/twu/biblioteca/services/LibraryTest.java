@@ -3,6 +3,7 @@ package com.twu.biblioteca.services;
 import com.twu.biblioteca.managers.Printer;
 import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
+import com.twu.biblioteca.models.Movie;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,9 +22,15 @@ public class LibraryTest {
     public Printer printer;
 
     @Spy
-    public List<Book> books = new ArrayList<Book>() {{
+    public List<Book> books = new ArrayList<>() {{
         add(Mockito.spy(new Book("test1", "author1", 2021)));
         add(Mockito.spy(new Book("test2", "author2", 2021, false)));
+    }};
+
+    @Spy
+    public List<Movie> movies = new ArrayList<>() {{
+        add(Mockito.spy(new Movie("test1", "director1", 2021, 10)));
+        add(Mockito.spy(new Movie("test2", "director2", 2021, 10, false)));
     }};
 
     @Mock
@@ -42,9 +49,9 @@ public class LibraryTest {
     }
 
     @Test
-    public void testListBooks() {
+    public void testListAvailableBooks() {
         Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
-        library.listBooks();
+        library.listAvailableBooks();
         Mockito.verify(printer, Mockito.times(1)).print(Matchers.anyString(), Matchers.eq(true));
     }
 
@@ -56,6 +63,7 @@ public class LibraryTest {
         Mockito.verify(printer, Mockito.times(1)).print("1 List of books", true);
         Mockito.verify(printer, Mockito.times(1)).print("2 Checkout a book", true);
         Mockito.verify(printer, Mockito.times(1)).print("3 Return a book", true);
+        Mockito.verify(printer, Mockito.times(1)).print("4 List of movies", true);
         Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
     }
 
@@ -98,6 +106,13 @@ public class LibraryTest {
         library.returnBook(bookNameForCheckout);
         Mockito.verify(printer, Mockito.times(0)).print("Thank you for returning the book", true);
         Mockito.verify(printer, Mockito.times(1)).print("That is not a valid book to return.", true);
+    }
+
+    @Test
+    public void testListAvailableMovies() {
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
+        library.listAvailableMovies();
+        Mockito.verify(printer, Mockito.times(1)).print(Matchers.anyString(), Matchers.eq(true));
     }
 
     @Test
