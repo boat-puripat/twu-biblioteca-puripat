@@ -1,5 +1,6 @@
 package com.twu.biblioteca.services;
 
+import com.twu.biblioteca.models.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,13 +16,13 @@ public class AuthenticationTest {
 
     @Test
     public void testVerifyUserSuccess() {
-        boolean actualValue = authentication.verifyUser("xxx-xxxx", "password");
-        assertTrue(actualValue);
+        User actualValue = authentication.verifyUser("xxx-xxxx", "password");
+        assertNotNull(actualValue);
     }
 
     @Test
     public void testVerifyUserFail() {
-        boolean actualValue = authentication.verifyUser("xxx-xxxxx", "password");
-        assertFalse(actualValue);
+        User actualValue = authentication.verifyUser("xxx-xxxxx", "password");
+        assertNull(actualValue);
     }
 }
