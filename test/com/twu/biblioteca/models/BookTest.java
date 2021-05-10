@@ -10,32 +10,11 @@ public class BookTest {
 
     @Before
     public void setup() {
-        testBook = new Book("name", "author", 2021);
-    }
-
-    @Test
-    public void testGetName() {
-        String expectedValue = "name";
-        String actualValue = testBook.getName();
-        assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void testIsAvailable() {
-        boolean actualValue = testBook.isAvailable();
-        assertTrue(actualValue);
-    }
-
-    @Test
-    public void testCheckout() {
-        testBook.checkout();
-        boolean actualValue = testBook.isAvailable();
-        assertFalse(actualValue);
+        testBook = new Book("name", "author", 2021, false);
     }
 
     @Test
     public void testReturnBook() {
-        testBook = new Book("name", "author", 2021, false);
         testBook.returnBook();
         boolean actualValue = testBook.isAvailable();
         assertTrue(actualValue);

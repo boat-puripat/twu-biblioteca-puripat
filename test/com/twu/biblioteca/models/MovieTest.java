@@ -14,19 +14,6 @@ public class MovieTest {
     }
 
     @Test
-    public void testGetName() {
-        String expectValue = "name";
-        String actualValue = testMovie.getName();
-        assertEquals(expectValue, actualValue);
-    }
-
-    @Test
-    public void testIsAvailable() {
-        boolean actualValue = testMovie.isAvailable();
-        assertTrue(actualValue);
-    }
-
-    @Test
     public void testToString() {
         String expectValue = "name\t2021\tdirector\t10";
         String actualValue = testMovie.toString();
