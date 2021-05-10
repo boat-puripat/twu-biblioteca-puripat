@@ -40,6 +40,11 @@ public class BibliotecaApp {
                 library.returnBook(bookName);
             }
             else if (selectedOption.equals("4")) library.listAvailableMovies();
+            else if (selectedOption.equals("5")) {
+                printer.print("Checkout movie name: ", false);
+                String movieName = scanner.nextLine();
+                library.checkoutMovie(movieName);
+            }
             else if (selectedOption.equals("q")) library.quit();
             else library.invalidOption();
         }
