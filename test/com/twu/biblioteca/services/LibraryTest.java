@@ -22,7 +22,7 @@ public class LibraryTest {
 
     @Spy
     public List<Book> books = new ArrayList<Book>() {{
-        add(new Book("test1", "author1", 2021));
+        add(Mockito.spy(new Book("test1", "author1", 2021)));
     }};
 
     @Mock
@@ -43,8 +43,9 @@ public class LibraryTest {
     @Test
     public void testListBooks() {
         Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
+        books.add(new Book("test2", "author2", 2021, false));
         library.listBooks();
-        Mockito.verify(printer, Mockito.times(books.size())).print(Matchers.anyString(), Matchers.eq(true));
+        Mockito.verify(printer, Mockito.times(1)).print(Matchers.anyString(), Matchers.eq(true));
     }
 
     @Test
@@ -53,6 +54,7 @@ public class LibraryTest {
         library.showMenu();
         Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
         Mockito.verify(printer, Mockito.times(1)).print("1 List of books", true);
+        Mockito.verify(printer, Mockito.times(1)).print("2 Checkout a book", true);
         Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
     }
 
@@ -61,6 +63,14 @@ public class LibraryTest {
         Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         library.invalidOption();
         Mockito.verify(printer, Mockito.times(1)).print("Please select a valid option!", true);
+    }
+
+    @Test
+    public void testCheckoutBook() {
+        String bookNameForCheckout = "test1";
+        library.checkoutBook(bookNameForCheckout);
+        Book testBook = books.stream().filter(book -> bookNameForCheckout.equals(book.getName())).findAny().get();
+        Mockito.verify(testBook, Mockito.times(1)).checkout();
     }
 
     @Test
