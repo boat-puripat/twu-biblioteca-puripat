@@ -2,6 +2,7 @@ package com.twu.biblioteca.models;
 
 import com.twu.biblioteca.constaints.ActionType;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,12 +11,14 @@ public class User {
     private String password;
     private List<ActionHistory> actionHistories;
 
-    public User() {}
+    public User() {
+        this.actionHistories = new ArrayList<>();
+    }
 
     public User(String libraryNumber, String password) {
         this.libraryNumber = libraryNumber;
         this.password = password;
-        this.actionHistories = Collections.emptyList();
+        this.actionHistories = new ArrayList<>();
     }
 
     public List<ActionHistory> getActionHistories() {
