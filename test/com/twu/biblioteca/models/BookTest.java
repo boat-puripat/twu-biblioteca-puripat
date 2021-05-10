@@ -21,20 +21,6 @@ public class BookTest {
     }
 
     @Test
-    public void testGetAuthor() {
-        String expectedValue = "author";
-        String actualValue = testBook.getAuthor();
-        assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void testGetPublicationYear() {
-        int expectedValue = 2021;
-        int actualValue = testBook.getPublicationYear();
-        assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
     public void testIsAvailable() {
         boolean actualValue = testBook.isAvailable();
         assertTrue(actualValue);
