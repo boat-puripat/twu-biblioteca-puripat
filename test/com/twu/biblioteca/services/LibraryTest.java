@@ -23,6 +23,7 @@ public class LibraryTest {
     @Spy
     public List<Book> books = new ArrayList<Book>() {{
         add(Mockito.spy(new Book("test1", "author1", 2021)));
+        add(Mockito.spy(new Book("test2", "author2", 2021, false)));
     }};
 
     @Mock
@@ -43,7 +44,6 @@ public class LibraryTest {
     @Test
     public void testListBooks() {
         Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
-        books.add(new Book("test2", "author2", 2021, false));
         library.listBooks();
         Mockito.verify(printer, Mockito.times(1)).print(Matchers.anyString(), Matchers.eq(true));
     }
@@ -55,6 +55,7 @@ public class LibraryTest {
         Mockito.verify(printer, Mockito.times(1)).print("Main Menu", true);
         Mockito.verify(printer, Mockito.times(1)).print("1 List of books", true);
         Mockito.verify(printer, Mockito.times(1)).print("2 Checkout a book", true);
+        Mockito.verify(printer, Mockito.times(1)).print("3 Return a book", true);
         Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
     }
 
@@ -78,9 +79,16 @@ public class LibraryTest {
     public void testCheckoutBookWithFail() {
         String bookNameForCheckout = "test2";
         library.checkoutBook(bookNameForCheckout);
-        Book testBook = books.stream().filter(book -> bookNameForCheckout.equals(book.getName())).findAny().orElse(null);
         Mockito.verify(printer, Mockito.times(0)).print("Thank you! Enjoy the book", true);
         Mockito.verify(printer, Mockito.times(1)).print("Sorry, that book is not available", true);
+    }
+
+    @Test
+    public void testReturnBook() {
+        String bookNameForReturn = "test2";
+        library.returnBook(bookNameForReturn);
+        Book testBook = books.stream().filter(book -> bookNameForReturn.equals(book.getName())).findAny().orElse(null);
+        Mockito.verify(testBook, Mockito.times(1)).returnBook();
     }
 
     @Test
