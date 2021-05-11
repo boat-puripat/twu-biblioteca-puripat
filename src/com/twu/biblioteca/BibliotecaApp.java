@@ -60,6 +60,7 @@ public class BibliotecaApp {
                 String movieName = scanner.nextLine();
                 library.checkoutMovie(movieName);
             }
+            else if (selectedOption.equals("v")) library.viewUserInformation();
             else if (selectedOption.equals("q")) library.quit();
             else library.invalidOption();
         }
