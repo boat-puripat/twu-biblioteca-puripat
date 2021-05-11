@@ -96,11 +96,22 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckoutBookWithSuccess() {
+    public void testCheckoutBookWithoutAuth() {
+        Library library = new Library(printer, systemExit, books, movies, null);
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         String bookNameForCheckout = "test1";
         library.checkoutBook(bookNameForCheckout);
+        Mockito.verify(printer, Mockito.times(0)).print("Thank you! Enjoy the book", true);
+        Mockito.verify(printer, Mockito.times(0)).print("Sorry, that book is not available", true);
+    }
+
+    @Test
+    public void testCheckoutBookWithSuccess() {
+        String bookNameForCheckout = "test1";
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         Book testBook = books.stream().filter(book -> bookNameForCheckout.equals(book.getName())).findAny().orElse(null);
         Mockito.doNothing().when(testUser).logAction(testBook, ActionType.CHECKOUT);
+        library.checkoutBook(bookNameForCheckout);
         Mockito.verify(testBook, Mockito.times(1)).checkout();
         Mockito.verify(testUser, Mockito.times(1)).logAction(testBook, ActionType.CHECKOUT);
         Mockito.verify(printer, Mockito.times(1)).print("Thank you! Enjoy the book", true);
@@ -108,6 +119,7 @@ public class LibraryTest {
 
     @Test
     public void testCheckoutBookWithFail() {
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         String bookNameForCheckout = "test2";
         library.checkoutBook(bookNameForCheckout);
         Mockito.verify(printer, Mockito.times(0)).print("Thank you! Enjoy the book", true);
@@ -115,11 +127,22 @@ public class LibraryTest {
     }
 
     @Test
-    public void testReturnBookWithSuccess() {
+    public void testReturnBookWithoutAuth() {
+        Library library = new Library(printer, systemExit, books, movies, null);
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         String bookNameForReturn = "test2";
         library.returnBook(bookNameForReturn);
+        Mockito.verify(printer, Mockito.times(0)).print("Thank you for returning the book", true);
+        Mockito.verify(printer, Mockito.times(0)).print("That is not a valid book to return.", true);
+    }
+
+    @Test
+    public void testReturnBookWithSuccess() {
+        String bookNameForReturn = "test2";
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         Book testBook = books.stream().filter(book -> bookNameForReturn.equals(book.getName())).findAny().orElse(null);
         Mockito.doNothing().when(testUser).logAction(testBook, ActionType.RETURN);
+        library.returnBook(bookNameForReturn);
         Mockito.verify(testBook, Mockito.times(1)).returnBook();
         Mockito.verify(testUser, Mockito.times(1)).logAction(testBook, ActionType.RETURN);
         Mockito.verify(printer, Mockito.times(1)).print("Thank you for returning the book", true);
@@ -127,6 +150,7 @@ public class LibraryTest {
 
     @Test
     public void testReturnBookWithFail() {
+        Mockito.doNothing().when(printer).print(Matchers.anyString(), Matchers.eq(true));
         String bookNameForCheckout = "test1";
         library.returnBook(bookNameForCheckout);
         Mockito.verify(printer, Mockito.times(0)).print("Thank you for returning the book", true);
