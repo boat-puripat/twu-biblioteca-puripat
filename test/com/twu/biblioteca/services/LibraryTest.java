@@ -181,7 +181,7 @@ public class LibraryTest {
     @Test
     public void testViewUserInformation() {
         String profile = "user";
-        Mockito.doReturn(profile).when(testUser).toString()
+        Mockito.doReturn(profile).when(testUser).toString();
         Mockito.doNothing().when(printer).print(profile, true);
         library.viewUserInformation();
         Mockito.verify(testUser, Mockito.times(1)).toString();
