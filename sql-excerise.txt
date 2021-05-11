@@ -1,0 +1,40 @@
+-- Answer Q1
+select m.name
+from member m
+join checkout_item c on c.member_id = m.id
+join book b on c.book_id = b.id
+where b.title = 'The Hobbit';
+
+-- Answer Q2
+select count(id)
+from member
+where id not in (
+    select member_id from checkout_item
+);
+
+-- Answer Q3
+select m.title
+from movie m
+left join checkout_item c on c.movie_id = m.id
+where c.movie_id is null;
+select b.title
+from book b
+left join checkout_item c on c.book_id = b.id
+where c.book_id is null;
+
+-- Answer Q4
+insert into book values (99, "The Pragmatic Programmer");
+insert into member values (99, "Puripat Arayasirikul");
+insert into checkout_item values (99, 99, null);
+select m.name
+from member m
+join checkout_item c on c.member_id = m.id
+join book b on c.book_id = b.id
+where b.title = 'The Pragmatic Programmer';
+
+-- Answer Q5
+select m.name
+from member m
+join checkout_item c on c.member_id = m.id
+group by m.name
+having count(c.member_id) > 1;
