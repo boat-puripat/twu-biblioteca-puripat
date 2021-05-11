@@ -52,6 +52,7 @@ public class Library {
     }
 
     public void checkoutBook(String bookName) {
+        if (user == null) return;
         Book bookForCheckout = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
         if (bookForCheckout != null && bookForCheckout.isAvailable()) {
             bookForCheckout.checkout();
@@ -63,6 +64,7 @@ public class Library {
     }
 
     public void returnBook(String bookName) {
+        if (user == null) return;
         Book bookForReturn = books.stream().filter(book -> bookName.equals(book.getName())).findAny().orElse(null);
         if (bookForReturn != null && !bookForReturn.isAvailable()) {
             bookForReturn.returnBook();
