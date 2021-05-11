@@ -71,6 +71,7 @@ public class LibraryTest {
         Mockito.verify(printer, Mockito.times(0)).print("3 Return a book", true);
         Mockito.verify(printer, Mockito.times(1)).print("4 List of movies", true);
         Mockito.verify(printer, Mockito.times(1)).print("5 Checkout a movie", true);
+        Mockito.verify(printer, Mockito.times(0)).print("v View my information", true);
         Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
 
     }
@@ -85,6 +86,7 @@ public class LibraryTest {
         Mockito.verify(printer, Mockito.times(1)).print("3 Return a book", true);
         Mockito.verify(printer, Mockito.times(1)).print("4 List of movies", true);
         Mockito.verify(printer, Mockito.times(1)).print("5 Checkout a movie", true);
+        Mockito.verify(printer, Mockito.times(1)).print("v View my information", true);
         Mockito.verify(printer, Mockito.times(1)).print("q Quit", true);
     }
 
