@@ -174,8 +174,9 @@ public class LibraryTest {
 
     @Test
     public void testViewUserInformationWithoutAuth() {
+        Library library = new Library(printer, systemExit, books, movies, null);
         library.viewUserInformation();
-        Mockito.verify(testUser, Mockito.times(0)).toString();
+        Mockito.verify(printer, Mockito.times(0)).print(Matchers.anyString(), Matchers.eq(true));
     }
 
     @Test
@@ -184,7 +185,6 @@ public class LibraryTest {
         Mockito.doReturn(profile).when(testUser).toString();
         Mockito.doNothing().when(printer).print(profile, true);
         library.viewUserInformation();
-        Mockito.verify(testUser, Mockito.times(1)).toString();
         Mockito.verify(printer, Mockito.times(1)).print(profile, true);
     }
 
