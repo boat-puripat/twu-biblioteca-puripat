@@ -44,6 +44,9 @@ public class Library {
         }
         printer.print("4 List of movies", true);
         printer.print("5 Checkout a movie", true);
+        if (user != null) {
+            printer.print("v View my information", true);
+        }
         printer.print("q Quit", true);
     }
 
