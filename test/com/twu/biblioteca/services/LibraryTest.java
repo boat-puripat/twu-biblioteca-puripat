@@ -173,6 +173,22 @@ public class LibraryTest {
     }
 
     @Test
+    public void testViewUserInformationWithoutAuth() {
+        library.viewUserInformation();
+        Mockito.verify(testUser, Mockito.times(0)).toString();
+    }
+
+    @Test
+    public void testViewUserInformation() {
+        String profile = "user";
+        Mockito.doReturn(profile).when(testUser).toString()
+        Mockito.doNothing().when(printer).print(profile, true);
+        library.viewUserInformation();
+        Mockito.verify(testUser, Mockito.times(1)).toString();
+        Mockito.verify(printer, Mockito.times(1)).print(profile, true);
+    }
+
+    @Test
     public void testQuit() {
         Mockito.doNothing().when(systemExit).exit(0);
         library.quit();
