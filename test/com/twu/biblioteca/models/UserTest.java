@@ -11,7 +11,7 @@ public class UserTest {
 
     @Before
     public void setup() {
-        testUser = new User("username", "password");
+        testUser = new User("username", "password", "name", "email", "phone number");
     }
 
     @Test
@@ -53,5 +53,12 @@ public class UserTest {
         User testUser2 = new User("username", "123456");
         boolean actualValue = testUser.equals(testUser2);
         assertFalse(actualValue);
+    }
+
+    @Test
+    public void testToString() {
+        String expectValue = "name\temail\tphone number";
+        String actualValue = testUser.toString();
+        assertEquals(expectValue, actualValue);
     }
 }
