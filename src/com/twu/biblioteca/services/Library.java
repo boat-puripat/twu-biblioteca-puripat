@@ -86,6 +86,12 @@ public class Library {
         if (movieForCheckout != null) movieForCheckout.checkout();
     }
 
+    public void viewUserInformation() {
+        if (user == null) return;
+        String userProfile = user.toString();
+        printer.print(userProfile, true);
+    }
+
     public void quit() {
         systemExit.exit(0);
     }
