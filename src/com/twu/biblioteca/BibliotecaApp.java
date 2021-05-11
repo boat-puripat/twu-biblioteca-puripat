@@ -4,6 +4,8 @@ import com.twu.biblioteca.managers.PrinterConsole;
 import com.twu.biblioteca.managers.SystemExit;
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.Movie;
+import com.twu.biblioteca.models.User;
+import com.twu.biblioteca.services.Authentication;
 import com.twu.biblioteca.services.Library;
 
 import java.util.ArrayList;
@@ -21,10 +23,23 @@ public class BibliotecaApp {
             add(new Movie("Parasite", "Mr. C", 2021, 10));
             add(new Movie("Dinosaur", "Mrs. D", 2021, 5));
         }};
-        Library library = new Library(printer, systemExit, books, movies);
+        Scanner scanner = new Scanner(System.in);
+        Authentication authentication = new Authentication();
+        User user;
+        printer.print("Need to login:(y/n) ", false);
+        String needToLogin = scanner.nextLine();
+        if (needToLogin.equalsIgnoreCase("y")) {
+            printer.print("Your library number: ", false);
+            String libraryNumber = scanner.nextLine();
+            printer.print("Your password: ", false);
+            String password = scanner.nextLine();
+            user = authentication.verifyUser(libraryNumber, password);
+        } else {
+            user = null;
+        }
+        Library library = new Library(printer, systemExit, books, movies, user);
         library.printWelcome();
         library.showMenu();
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             printer.print("Choose option: ", false);
             String selectedOption = scanner.nextLine();
